@@ -26,4 +26,5 @@ dependencies {
     compile 'com.android.support:design:23.1.1'
     compile 'com.google.android.gms:play-services:8.4.0'
     compile 'com.github.fafaldo:fab-toolbar:1.2.0'
+    compile 'com.emmasuzuki:easyform:1.0.0'
 }

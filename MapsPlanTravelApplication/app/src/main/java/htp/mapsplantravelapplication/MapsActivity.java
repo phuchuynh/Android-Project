@@ -1,5 +1,6 @@
 package htp.mapsplantravelapplication;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
@@ -36,6 +37,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      public  void findViewById()
      {
          toolbarLayout= (FABToolbarLayout)findViewById(R.id.fabtoolbar);
+         list=(View)findViewById(R.id.list_button);
      }
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -51,6 +53,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             public void onMapLongClick(LatLng latLng) {
 
                 toolbarLayout.show();
+                list.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(MapsActivity.this, AddListActivity.class);
+                        startActivity(intent);
+                    }
+                });
             }
         });
     }
