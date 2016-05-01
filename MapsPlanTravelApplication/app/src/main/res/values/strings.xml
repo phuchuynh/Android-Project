@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">MapsPlanTravelApplication</string>
     <string name="title_activity_maps">Map</string>
+    <string name="title_add_lisst">Add list Plan for Travel</string>
 
 
     <!--form addd-->
@@ -8,6 +9,7 @@
     <string name="form_2">Form 2</string>
     <string name="form_3">Form 3</string>
     <string name="submit">Submit</string>
+    <string name="reset">Resert</string>
 
     <string name="empty_check">Empty check</string>
     <string name="email_check">Email check</string>
