@@ -27,4 +27,5 @@ dependencies {
     compile 'com.google.android.gms:play-services:8.4.0'
     compile 'com.github.fafaldo:fab-toolbar:1.2.0'
     compile 'com.emmasuzuki:easyform:1.0.0'
+    compile 'com.wdullaer:materialdatetimepicker:2.3.0'
 }

@@ -2,6 +2,7 @@
     <string name="app_name">MapsPlanTravelApplication</string>
     <string name="title_activity_maps">Map</string>
     <string name="title_add_lisst">Add list Plan for Travel</string>
+    <string name="search">Search Place</string>
 
 
     <!--form addd-->
@@ -17,7 +18,7 @@
     <string name="no_check">No check</string>
 
     <string name="error_message_empty">Please input Tilte this field</string>
-    <string name="error_message_date">Please input valid Date</string>
+    <string name="error_message_date">Please input valid Date and Time</string>
     <string name="error_message_digit">Please input Date only</string>
     <string name="error_message_employee_id">Employee ID must be above or equal to 100.</string>
     <string name="error_message_account">Account should be 6&#8211;12 chars</string>
