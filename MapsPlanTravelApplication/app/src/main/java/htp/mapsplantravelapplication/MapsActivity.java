@@ -158,7 +158,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 locate.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        getMyLocation();
+                       getMyLocation();
+
                     }
                 });
 
@@ -209,7 +210,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         {
             double latitude = location.getLatitude();
             double langitude = location.getLongitude();
-
             onLocationChange(location);
 
         }
@@ -225,7 +225,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 //stringBuilder.append(address.getSubLocality());
 
                 for (int i = 0; i < address.getMaxAddressLineIndex(); i++)
-                    stringBuilder.append(address.getAddressLine(i)).append(" ");
+                    stringBuilder.append(address.getAddressLine(i)).append(", ");
                 stringBuilder.append(address.getCountryName());
 
                 //stringBuilder.append(address.getLocality()).append(",");
