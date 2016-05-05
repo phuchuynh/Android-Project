@@ -68,7 +68,7 @@ public class DatabaseHander extends SQLiteOpenHelper {
         values.put(LIST_LAT, objectPlan.getLat());
         values.put(LIST_LNG, objectPlan.getLng());
         long time = objectPlan.getDate().getTime();
-        int dateInt = (int) (time/1000);
+        int dateInt = (int) (time / 1000);
         values.put(LIST_DATE, dateInt);
         long result = db.insert(DATABASE_TABLE_LIST, null, values);
         return result != -1;
@@ -103,10 +103,10 @@ public class DatabaseHander extends SQLiteOpenHelper {
                 objectPlan.setTitle(cursor.getString(1));
                 objectPlan.setContent(cursor.getString(2));
                 objectPlan.setPlace(cursor.getString(3));
-                objectPlan.setLng(Double.parseDouble(cursor.getString(4)));
-                objectPlan.setLat(Double.parseDouble(cursor.getString(5)));
+                objectPlan.setLat(Double.parseDouble(cursor.getString(4)));
+                objectPlan.setLng(Double.parseDouble(cursor.getString(5)));
                 int date = cursor.getInt(6);
-                Date databaseDate = new Date(((long)date)*1000L);
+                Date databaseDate = new Date(((long) date) * 1000L);
                 objectPlan.setDate(new Timestamp(databaseDate.getTime()));
                 objectPlan.setIs_delete(Integer.parseInt(cursor.getString(7)));
 
@@ -116,4 +116,8 @@ public class DatabaseHander extends SQLiteOpenHelper {
         }
         return objectPlanList;
     }
+
+
 }
+
+

@@ -63,7 +63,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/txt_Content"
             android:layout_marginTop="4dp"
-            app:errorMessage="@string/error_message_date"
+
             />
         <com.emmasuzuki.easyform.EasyTextInputLayout
             android:id="@+id/place_check_lng"
@@ -73,7 +73,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/place_check_lat"
             android:layout_marginTop="4dp"
-            app:errorMessage="@string/error_message_date"
+
             />
 
         <Button

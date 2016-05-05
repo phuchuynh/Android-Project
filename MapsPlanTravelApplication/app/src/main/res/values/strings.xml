@@ -2,6 +2,7 @@
     <string name="app_name">MapsPlanTravelApplication</string>
     <string name="title_activity_maps">Map</string>
     <string name="title_add_lisst">Add list Plan for Travel</string>
+    <string name="title_show_lisst">View List All List Plan </string>
     <string name="search">Search Place</string>
 
 

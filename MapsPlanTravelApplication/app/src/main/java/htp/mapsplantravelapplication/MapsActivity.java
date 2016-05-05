@@ -31,9 +31,11 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.VisibleRegion;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import htp.mapsplantravelapplication.datasource.DatabaseHander;
 import htp.mapsplantravelapplication.model.ObjectPlan;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnInfoWindowClickListener {
@@ -41,7 +43,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private GoogleMap mMap;
     // Tooolbar
     private FABToolbarLayout toolbarLayout;
-    private View locate, show, search, list;
+    private View locate, show, search, list,back;
     private TextView txtInfo;
     private View fab;
     //search
@@ -81,13 +83,27 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         locate = (View) findViewById(R.id.location_button);
         search = (View) findViewById(R.id.search_button);
         show = (View) findViewById(R.id.show_list_button);
-
+        back=(View) findViewById(R.id.back_button);
         searchMenu = (Menu) findViewById(R.id.action_search);
     }
 
     @Override
     public void onMapReady(final GoogleMap googleMap) {
         mMap = googleMap;
+
+        LatLng mapCenter = new LatLng(10.796519, 106.693636);
+
+        googleMap.addMarker(new MarkerOptions()
+                .title("1231")
+                .position(mapCenter)
+                .flat(true)
+                .rotation(245));
+         googleMap.addMarker(new MarkerOptions()
+                .position(new LatLng(40.953644, -85.130193))
+               );
+
+
+
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             Toast.makeText(MapsActivity.this, "Location permission is not available for google map api", Toast.LENGTH_LONG).show();
             return;
@@ -114,6 +130,37 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         });
 
+        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+            @Override
+            public void onMapClick(LatLng latLng) {
+                toolbarLayout.show();
+
+                final MarkerOptions markerOptions= new MarkerOptions();
+                markerOptions.position(latLng);
+                googleMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
+                locate.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        Toast.makeText(MapsActivity.this,"View Show",Toast.LENGTH_SHORT).show();
+                        getMyLocation();
+                        ArrayList<ObjectPlan> arrayOfPlans = new ArrayList<ObjectPlan>();
+                        DatabaseHander hander =new DatabaseHander(MapsActivity.this);
+                        arrayOfPlans = hander.getAllPlan(location.getLatitude(),location.getLongitude());
+                        if(arrayOfPlans.size() > 0){
+                            for (int i=0; i < arrayOfPlans.size();i++)
+                            {
+                                createMarker(
+                                        arrayOfPlans.get(i).getLat(),
+                                        arrayOfPlans.get(i).getLng(),
+                                        arrayOfPlans.get(i).getTitle(),
+                                        mMap);
+                            }
+                        }
+                    }
+                });
+            }
+        });
 
         mMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
             @Override
@@ -122,8 +169,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 MarkerOptions markerOptions= new MarkerOptions();
                 markerOptions.position(latLng);
                 googleMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
-                Marker marker= googleMap.addMarker(markerOptions);
-                String   address= getLocation(marker.getPosition().latitude, marker.getPosition().longitude);
+                final Marker marker= googleMap.addMarker(markerOptions);
+                final String   address= getLocation(marker.getPosition().latitude, marker.getPosition().longitude);
                 marker.showInfoWindow();
                 toolbarLayout.show();
                 objectPlan = new ObjectPlan();
@@ -145,6 +192,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     @Override
                     public void onClick(View v) {
 
+
                     }
                 });
                 show.setOnClickListener(new View.OnClickListener() {
@@ -155,18 +203,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         startActivity(intent);
                     }
                 });
-                locate.setOnClickListener(new View.OnClickListener() {
+
+                back.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                       getMyLocation();
-
+                        toolbarLayout.hide();
+                        googleMap.clear();
                     }
                 });
 
-
             }
         });
+
+
     }
+
 
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -212,6 +263,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             double langitude = location.getLongitude();
             onLocationChange(location);
 
+
         }
     }
 
@@ -241,6 +293,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onInfoWindowClick(Marker marker) {
 
     }
+    protected void createMarker(double latitude, double longitude, String title,  GoogleMap googleMap) {
+        googleMap.addMarker(new MarkerOptions()
+                .position(new LatLng(latitude, longitude))
+                .anchor(0.5f, 0.5f)
+                .title(title));
+    }
+
 }
 
 

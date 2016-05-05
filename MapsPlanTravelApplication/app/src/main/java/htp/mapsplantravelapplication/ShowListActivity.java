@@ -3,6 +3,9 @@ package htp.mapsplantravelapplication;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -36,5 +39,26 @@ public class ShowListActivity extends AppCompatActivity {
         PlanAdapter adapter = new PlanAdapter(this, arrayOfPlans);
         ListView listView = (ListView) findViewById(R.id.list_plan);
         listView.setAdapter(adapter);
+    }
+
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        MenuInflater inflater = getMenuInflater();
+        getMenuInflater().inflate(R.menu.menu_show_list, menu);
+        return super.onCreateOptionsMenu(menu);
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_view_back:
+                Intent intent = new Intent(ShowListActivity.this, MapsActivity.class);
+                startActivity(intent);
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
     }
 }
